@@ -38,21 +38,17 @@ function App() {
       setCity(cityDetails.data[0].city);
       let lat = cityDetails.data[0].latitude;
       let lon = cityDetails.data[0].longitude;
-      console.log(`name: ${cityName}\nlatitude: ${lat}\nlongitude ${lon}`);
       const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${weatherKey}`;
       const weatherResponse = await fetch(weatherURL);
       const weatherResult = await weatherResponse.json();
       setWeatherData(weatherResult);
-      console.log(weatherResult);
       const forecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherKey}&units=metric`;
       const forecastResponse = await fetch(forecastURL);
       const forecastResult = await forecastResponse.json();
       const weekForecast = forecastResult.list.splice(1, 7);
       setForecastData(weekForecast);
       setError(false);
-      console.log(forecastResult);
     } catch (error) {
-      console.log(error);
       setError(true);
     }
   }
@@ -65,7 +61,7 @@ function App() {
           placeholder="Search for city"
         ></input>
         <button onClick={FindCity}>Enter</button>
-        <h1>City not found</h1>
+        <h1>An error has occurred</h1>
       </div>
     );
   }
@@ -130,7 +126,6 @@ function App() {
                 className="weather-icon"
                 src={`icons/${item.weather[0].icon}.png`}
               />
-              {console.log(item.weather[0].icon)}
               <h3>{item.main.temp}°C </h3>
               <h5 className="light">{item.weather[0].description}</h5>
               <div className="min-max">
