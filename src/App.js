@@ -56,7 +56,7 @@ function App() {
       setError(true);
     }
   }
-  if (error === true) {
+  if (error) {
     return (
       <div className="App">
         <input
@@ -96,7 +96,9 @@ function App() {
         <button onClick={FindCity}>Enter</button>
         <div className="card">
           <h1 className="city">{city}</h1>
-          <h4>{weatherData.weather[0].description}</h4>
+          <h4 className="weather-description">
+            {weatherData.weather[0].description}
+          </h4>
           <div className="flex">
             <img
               alt="weather"
@@ -132,8 +134,12 @@ function App() {
               <h3>{item.main.temp}°C </h3>
               <h5 className="light">{item.weather[0].description}</h5>
               <div className="min-max">
-                <h5 className="light">Max: {Math.round(item.main.temp_max)}°C</h5>
-                <h5 className="light">Min: {Math.round(item.main.temp_min)}°C</h5>
+                <h5 className="light">
+                  Max: {Math.round(item.main.temp_max)}°C
+                </h5>
+                <h5 className="light">
+                  Min: {Math.round(item.main.temp_min)}°C
+                </h5>
               </div>
             </div>
           ))}
